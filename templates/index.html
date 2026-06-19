@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart CSV Validator Pro</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📊 Smart CSV Validator Pro</h1>
+    <p>Upload your CSV file and get instant validation report</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required>
+        <button type="submit">Validate Now</button>
+    </form>
+
+    {% if errors %}
+        <div class="card error-box">
+            <h3>⚠ Issues Found</h3>
+            <ul>
+                {% for e in errors %}
+                    <li>{{ e }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        {% if table %}
+        <div class="card success-box">
+            <h3>✅ File Looks Clean</h3>
+        </div>
+        {% endif %}
+    {% endif %}
+
+    {% if table %}
+        <div class="card table-box">
+            <h3>📄 Preview</h3>
+            {{ table | safe }}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
